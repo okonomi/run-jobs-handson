@@ -1,24 +1,39 @@
-# README
+build:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+```
+docker build --platform linux/x86_64 -t gcr.io/PROJECT_ID/rails-task .
+```
 
-Things you may want to cover:
+push:
 
-* Ruby version
+```
+docker push gcr.io/PROJECT_ID/rails-task:latest
+```
 
-* System dependencies
+deploy:
 
-* Configuration
+```
+gcloud beta run jobs create rails-task \
+        --image gcr.io/PROJECT_ID/rails-task \
+        --command bin/rails \
+        --args about \
+        --tasks 1 \
+        --max-retries 0
+```
 
-* Database creation
+or
 
-* Database initialization
+```
+gcloud beta run jobs update rails-task \
+        --image gcr.io/PROJECT_ID/rails-task \
+        --command bin/rails \
+        --args about \
+        --tasks 1 \
+        --max-retries 0
+```
 
-* How to run the test suite
+execute:
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+gcloud beta run jobs execute rails-task
+```
