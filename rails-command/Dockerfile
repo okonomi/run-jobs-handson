@@ -23,5 +23,3 @@ ENV RAILS_ENV=production
 
 COPY . .
 COPY --from=base /app/vendor/bundle vendor/bundle
-
-CMD ["bin/rails"]
